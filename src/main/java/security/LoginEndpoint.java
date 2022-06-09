@@ -36,6 +36,7 @@ public class LoginEndpoint {
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     public static final UserRepo USER_REPO = UserRepo.getUserRepo(EMF);
 
+
     @Path("login")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
