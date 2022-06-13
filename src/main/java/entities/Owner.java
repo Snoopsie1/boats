@@ -60,4 +60,12 @@ public class Owner {
     public void setPhoneNum(int phoneNum) {
         this.phoneNum = phoneNum;
     }
+
+    public List<Boat> getBoats() {
+        return boats;
+    }
+
+    public void setBoats(List<Boat> boats) {
+        this.boats = boats;
+    }
 }
