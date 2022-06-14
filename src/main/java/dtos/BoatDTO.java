@@ -12,15 +12,15 @@ public class BoatDTO {
     private String name;
     private String image;
 
-    private List<OwnerDTO> owners = new ArrayList<>();
+    private List<String> ownerName = new ArrayList<>();
     private HarbourDTO harbour;
 
-    public BoatDTO(String brand, String make, String name, String image, List<OwnerDTO> owners, HarbourDTO harbour) {
+    public BoatDTO(String brand, String make, String name, String image, List<String> ownerName, HarbourDTO harbour) {
         this.brand = brand;
         this.make = make;
         this.name = name;
         this.image = image;
-        this.owners = owners;
+        this.ownerName = ownerName;
         this.harbour = harbour;
     }
 
@@ -31,7 +31,7 @@ public class BoatDTO {
         this.make = boat.getMake();
         this.name = boat.getName();
         this.image = boat.getImage();
-        boat.getOwners().forEach(owner -> this.owners.add(new OwnerDTO(owner)));
+        boat.getOwners().forEach(owner -> this.ownerName.add(owner.getName()));
     }
 
     public int getId() {
@@ -74,12 +74,12 @@ public class BoatDTO {
         this.image = image;
     }
 
-    public List<OwnerDTO> getOwners() {
-        return owners;
+    public List<String> getOwners() {
+        return ownerName;
     }
 
-    public void setOwners(List<OwnerDTO> owners) {
-        this.owners = owners;
+    public void setOwners(List<String> owners) {
+        this.ownerName = owners;
     }
 
     public HarbourDTO getHarbour() {
@@ -98,7 +98,7 @@ public class BoatDTO {
                 ", make='" + make + '\'' +
                 ", name='" + name + '\'' +
                 ", image='" + image + '\'' +
-                ", owners=" + owners +
+                ", owners=" + ownerName +
                 ", harbour=" + harbour +
                 '}';
     }
