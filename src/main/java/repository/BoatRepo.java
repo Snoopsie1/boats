@@ -1,6 +1,8 @@
 package repository;
 
+import dtos.BoatDTO;
 import dtos.OwnerDTO;
+import entities.Boat;
 import entities.Owner;
 
 import javax.persistence.EntityManager;
@@ -10,18 +12,18 @@ import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OwnerRepo {
+public class BoatRepo {
 
-    private static OwnerRepo instance;
+    private static BoatRepo instance;
     private static EntityManagerFactory emf;
 
-    private OwnerRepo() {}
+    private BoatRepo() {}
 
 
-    public static OwnerRepo getRepositoryExample(EntityManagerFactory _emf) {
+    public static BoatRepo getRepositoryExample(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
-            instance = new OwnerRepo();
+            instance = new BoatRepo();
         }
         return instance;
     }
@@ -30,29 +32,31 @@ public class OwnerRepo {
         return emf.createEntityManager();
     }
 
-    public OwnerDTO getById(int id) throws EntityNotFoundException {
+
+    public BoatDTO getById(int id) throws EntityNotFoundException {
         EntityManager em = getEntityManager();
-        Owner owner = em.find(Owner.class, id);
-        if (owner == null)
+        Boat boat = em.find(Boat.class, id);
+        if (boat == null)
             throw new EntityNotFoundException("The Owner entity with ID: "+id+" was not found");
-        return new OwnerDTO(owner);
+        return new BoatDTO(boat);
     }
 
-    public List<OwnerDTO> getAllOwners() throws EntityNotFoundException {
+    public List<OwnerDTO> ownsBoatById(int id) throws EntityNotFoundException {
         EntityManager em = getEntityManager();
-        List<OwnerDTO> ownerDTOS = new ArrayList<>();
+        List<OwnerDTO> foundOwners = new ArrayList<>();
 
         try {
-            TypedQuery<Owner> typedQuery = em.createQuery("SELECT owner FROM Owner owner", Owner.class);
-            List<Owner> owners = typedQuery.getResultList();
+            Boat boat = em.find(Boat.class, id);
+            List<Owner> boatOwners = boat.getOwners();
 
-            for (Owner owner : owners) {
-                ownerDTOS.add(new OwnerDTO(owner));
+            for (Owner boatOwner : boatOwners) {
+                foundOwners.add(new OwnerDTO(boatOwner));
             }
         } finally {
             em.close();
         }
 
-        return ownerDTOS;
+        return foundOwners;
     }
+
 }
