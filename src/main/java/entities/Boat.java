@@ -38,6 +38,15 @@ public class Boat {
         this.owners = owners;
     }
 
+    public Boat(String brand, String make, String name, String image, List<Owner> owners, Harbour harbour) {
+        this.brand = brand;
+        this.make = make;
+        this.name = name;
+        this.image = image;
+        this.owners = owners;
+        this.harbour = harbour;
+    }
+
     public int getId() {
         return id;
     }

@@ -25,7 +25,7 @@ public class BoatDTO {
     }
 
     public BoatDTO(Boat boat) {
-        if(boat.getId()!= 0);
+        if(boat.getId()!= 0)
             this.id = boat.getId();
         this.brand = boat.getBrand();
         this.make = boat.getMake();
